@@ -32,7 +32,23 @@ def gameover(screen: pg.Surface) -> None:
     screen.blit(crykk_img, [850, 250])
     pg.display.update()
     time.sleep(5)#表示時間の設定
-    
+print(gameover.__doc__)
+
+# def init_bb_imgs() -> tuple[list[pg.Surface], list[int]]:
+#     for r in range(1, 11):
+#         bb_img = pg.Surface((20*r, 20*r))
+#         pg.draw.circle(bb_img, (255, 0, 0), (10*r, 10*r), 10*r)
+#         bb_imgs.append(bb_img)
+#             bb_accs = [a for a in range(1, 11)]
+
+# def get_kk_imgs() -> dict[tuple[int, int], pg.Surface]:
+#     kk_dict = {
+#         ( 0, 0): rotozoom(???) # キー押下がない場合
+#         (+5, 0): rotozoom(???) # 右
+#         (+5,-5): rotozoom(???) # 右上
+#         ( 0,-5): rotozoom(???) # 上
+
+#     }
 
 def check_bound(rect: pg.Rect) -> tuple[bool, bool]:
     """
