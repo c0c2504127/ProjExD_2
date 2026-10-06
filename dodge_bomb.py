@@ -2,6 +2,7 @@ import os
 import sys
 import pygame as pg
 import random
+import time
 
 
 WIDTH, HEIGHT = 1100, 650
@@ -11,6 +12,28 @@ DELTA = {pg.K_UP:(0,-5),
         pg.K_DOWN:(0,5),
         pg.K_LEFT:(-5,0),
         pg.K_RIGHT:(5,0),}
+
+def gameover(screen: pg.Surface) -> None:
+    """
+    引数：
+    戻り値：
+    """
+    surface = pg.Surface((WIDTH, HEIGHT))
+    pg.draw.rect(surface,(0, 0, 0),(0, 0, WIDTH, HEIGHT))
+    # surface.set_colorkey((0, 0, 0))
+    surface.set_alpha(200)
+    fonto = pg.font.Font(None, 80)
+    txt = fonto.render("Game Over", True, (255, 255, 255))
+    crykk_img = pg.image.load("fig/8.png")
+    cry_rct = crykk_img.get_rect()
+
+    screen.blit(surface, [0, 0])
+    screen.blit(txt,[400, 250])
+    screen.blit(crykk_img, [200, 250])
+    screen.blit(crykk_img, [850, 250])
+    pg.display.update()
+    time.sleep(5)
+    
 
 def check_bound(rect: pg.Rect) -> tuple[bool, bool]:
     """
@@ -23,7 +46,7 @@ def check_bound(rect: pg.Rect) -> tuple[bool, bool]:
         yoko = False
     if rect.top < 0 or HEIGHT < rect.bottom:
         tate = False
-    return yoko,tate
+    return yoko, tate
 
 def main():
     pg.display.set_caption("逃げろ！こうかとん")
@@ -32,12 +55,12 @@ def main():
     kk_img = pg.transform.rotozoom(pg.image.load("fig/3.png"), 0, 0.9)
     kk_rct = kk_img.get_rect()
     kk_rct.center = 300, 200
-    bb_img = pg.Surface((20,20))
-    pg.draw.circle(bb_img,(255,0,0),(10,10),10)
-    bb_img.set_colorkey((0,0,0,))
+    bb_img = pg.Surface((20, 20))
+    pg.draw.circle(bb_img, (255, 0, 0), (10, 10), 10)
+    bb_img.set_colorkey((0, 0, 0,))
     bb_rct = bb_img.get_rect()
-    bb_rct.centerx = random.randint(0,WIDTH)
-    bb_rct.centery = random.randint(0,HEIGHT)
+    bb_rct.centerx = random.randint(0, WIDTH)
+    bb_rct.centery = random.randint(0, HEIGHT)
     vx,vy = +5, +5
     clock = pg.time.Clock()
     tmr = 0
@@ -49,7 +72,8 @@ def main():
 
         if kk_rct.colliderect(bb_rct):
             print("game over")
-            return
+            gameover(screen)
+            
 
         key_lst = pg.key.get_pressed()
             
@@ -69,17 +93,17 @@ def main():
                 sum_mv[1] += tpl[1]#縦移動
 
         kk_rct.move_ip(sum_mv)
-        if check_bound(kk_rct) != (True,True):
+        if check_bound(kk_rct) != (True, True):
             kk_rct.move_ip(-sum_mv[0], -sum_mv[1])
         screen.blit(kk_img, kk_rct)
 
-        bb_rct.move_ip(vx,vy)
+        bb_rct.move_ip(vx, vy)
         yoko, tate = check_bound(bb_rct)
         if not yoko:
             vx *= -1
         if not tate:
             vy *= -1
-        screen.blit(bb_img,bb_rct)
+        screen.blit(bb_img, bb_rct)
 
         pg.display.update()
         tmr += 1
