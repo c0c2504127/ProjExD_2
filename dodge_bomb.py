@@ -41,14 +41,14 @@ print(gameover.__doc__)
 #         bb_imgs.append(bb_img)
 #             bb_accs = [a for a in range(1, 11)]
 
-# def get_kk_imgs() -> dict[tuple[int, int], pg.Surface]:
-#     kk_dict = {
-#         ( 0, 0): rotozoom(???) # キー押下がない場合
-#         (+5, 0): rotozoom(???) # 右
-#         (+5,-5): rotozoom(???) # 右上
-#         ( 0,-5): rotozoom(???) # 上
+def get_kk_imgs() -> dict[tuple[int, int], pg.Surface]:
+    kk_dict = {
+        ( 0, 0): rotozoom() # キー押下がない場合
+        (+5, 0): rotozoom(???) # 右
+        (+5,-5): rotozoom(???) # 右上
+        ( 0,-5): rotozoom(???) # 上
 
-#     }
+    }
 
 def check_bound(rect: pg.Rect) -> tuple[bool, bool]:
     """
@@ -79,6 +79,9 @@ def main():
     vx,vy = +5, +5
     clock = pg.time.Clock()
     tmr = 0
+
+
+
     while True:
         for event in pg.event.get():
             if event.type == pg.QUIT: 
@@ -87,7 +90,7 @@ def main():
 
         if kk_rct.colliderect(bb_rct):
             print("game over")
-            gameover(screen)
+            gameover(screen) #演習１呼び出し
             
 
         key_lst = pg.key.get_pressed()
