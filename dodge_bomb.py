@@ -19,20 +19,20 @@ def gameover(screen: pg.Surface) -> None:
     引数：表示場所
     戻り値：GameOver表示
     """
-    surface = pg.Surface((WIDTH, HEIGHT))#空のsurfaceをつくる
-    pg.draw.rect(surface,(0, 0, 0),(0, 0, WIDTH, HEIGHT))#黒い四角を描画
-    surface.set_alpha(200)#四角の透明度調整
-    fonto = pg.font.Font(None, 80)#文字を作成
+    surface = pg.Surface((WIDTH, HEIGHT))  # 空のsurfaceをつくる
+    pg.draw.rect(surface,(0, 0, 0),(0, 0, WIDTH, HEIGHT))  # 黒い四角を描画
+    surface.set_alpha(200)  # 四角の透明度調整
+    fonto = pg.font.Font(None, 80)  # 文字を作成
     txt = fonto.render("Game Over", True, (255, 255, 255))
-    crykk_img = pg.image.load("fig/8.png")#画像を呼ぶ
+    crykk_img = pg.image.load("fig/8.png")  # 画像を呼ぶ
     cry_rct = crykk_img.get_rect()
 
-    screen.blit(surface, [0, 0])#screanに呼び出す
+    screen.blit(surface, [0, 0])  # screanに呼び出す
     screen.blit(txt,[400, 250])
     screen.blit(crykk_img, [200, 250])
     screen.blit(crykk_img, [850, 250])
     pg.display.update()
-    time.sleep(5)#表示時間の設定
+    time.sleep(5)  # 表示時間の設定
     print(gameover.__doc__)
 
 
@@ -75,7 +75,7 @@ def main():
 
         if kk_rct.colliderect(bb_rct):
             print("game over")
-            gameover(screen) #演習１呼び出し
+            gameover(screen)  # 演習１呼び出し
             return
 
         key_lst = pg.key.get_pressed()
@@ -92,8 +92,8 @@ def main():
 
         for k, tpl in DELTA.items():
             if key_lst[k]:
-                sum_mv[0] += tpl[0]#横移動
-                sum_mv[1] += tpl[1]#縦移動
+                sum_mv[0] += tpl[0]  # 横移動
+                sum_mv[1] += tpl[1]  # 縦移動
 
         kk_rct.move_ip(sum_mv)
         if check_bound(kk_rct) != (True, True):
