@@ -8,31 +8,30 @@ import time
 WIDTH, HEIGHT = 1100, 650
 os.chdir(os.path.dirname(os.path.abspath(__file__)))
 
-DELTA = {pg.K_UP:(0,-5),
-        pg.K_DOWN:(0,5),
-        pg.K_LEFT:(-5,0),
-        pg.K_RIGHT:(5,0),}
+DELTA = {pg.K_UP:(0, -5),
+        pg.K_DOWN:(0, 5),
+        pg.K_LEFT:(-5, 0),
+        pg.K_RIGHT:(5, 0),}
 
 def gameover(screen: pg.Surface) -> None:
     """
-    引数：
-    戻り値：
+    引数：表示場所
+    戻り値：GameOver表示
     """
-    surface = pg.Surface((WIDTH, HEIGHT))
-    pg.draw.rect(surface,(0, 0, 0),(0, 0, WIDTH, HEIGHT))
-    # surface.set_colorkey((0, 0, 0))
-    surface.set_alpha(200)
-    fonto = pg.font.Font(None, 80)
+    surface = pg.Surface((WIDTH, HEIGHT))#空のsurfaceをつくる
+    pg.draw.rect(surface,(0, 0, 0),(0, 0, WIDTH, HEIGHT))#黒い四角を描画
+    surface.set_alpha(200)#四角の透明度調整
+    fonto = pg.font.Font(None, 80)#文字を作成
     txt = fonto.render("Game Over", True, (255, 255, 255))
-    crykk_img = pg.image.load("fig/8.png")
+    crykk_img = pg.image.load("fig/8.png")#画像を呼ぶ
     cry_rct = crykk_img.get_rect()
 
-    screen.blit(surface, [0, 0])
+    screen.blit(surface, [0, 0])#screanに呼び出す
     screen.blit(txt,[400, 250])
     screen.blit(crykk_img, [200, 250])
     screen.blit(crykk_img, [850, 250])
     pg.display.update()
-    time.sleep(5)
+    time.sleep(5)#表示時間の設定
     
 
 def check_bound(rect: pg.Rect) -> tuple[bool, bool]:
