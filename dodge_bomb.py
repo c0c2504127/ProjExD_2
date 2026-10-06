@@ -13,6 +13,7 @@ DELTA = {pg.K_UP:(0, -5),
         pg.K_LEFT:(-5, 0),
         pg.K_RIGHT:(5, 0),}
 
+
 def gameover(screen: pg.Surface) -> None:
     """
     引数：表示場所
@@ -34,21 +35,6 @@ def gameover(screen: pg.Surface) -> None:
     time.sleep(5)#表示時間の設定
     print(gameover.__doc__)
 
-# def init_bb_imgs() -> tuple[list[pg.Surface], list[int]]:
-#     for r in range(1, 11):
-#         bb_img = pg.Surface((20*r, 20*r))
-#         pg.draw.circle(bb_img, (255, 0, 0), (10*r, 10*r), 10*r)
-#         bb_imgs.append(bb_img)
-#             bb_accs = [a for a in range(1, 11)]
-
-# def get_kk_imgs() -> dict[tuple[int, int], pg.Surface]:
-#     kk_dict = {
-#         ( 0, 0): rotozoom() # キー押下がない場合
-#         (+5, 0): rotozoom(???) # 右
-#         (+5,-5): rotozoom(???) # 右上
-#         ( 0,-5): rotozoom(???) # 上
-
-#     }
 
 def check_bound(rect: pg.Rect) -> tuple[bool, bool]:
     """
@@ -62,6 +48,7 @@ def check_bound(rect: pg.Rect) -> tuple[bool, bool]:
     if rect.top < 0 or HEIGHT < rect.bottom:
         tate = False
     return yoko, tate
+
 
 def main():
     pg.display.set_caption("逃げろ！こうかとん")
@@ -79,8 +66,6 @@ def main():
     vx,vy = +5, +5
     clock = pg.time.Clock()
     tmr = 0
-
-
 
     while True:
         for event in pg.event.get():
